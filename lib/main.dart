@@ -1,13 +1,13 @@
-import 'package:finance/register.dart';
-import 'package:finance/tabbar.dart';
+import 'package:finance/screen/register.dart';
+import 'package:finance/tabbarPage/tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'get_start.dart';
+import 'screen/get_start.dart';
 import 'homepage.dart';
-import 'login.dart';
-import 'income.dart';
-import 'outcome.dart';
+import 'screen/login.dart';
+import 'tabbarPage/income.dart';
+import 'tabbarPage/outcome.dart';
 // import 'verify.dart';
 
 void main() async {

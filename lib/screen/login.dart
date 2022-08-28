@@ -1,4 +1,4 @@
-import 'package:finance/reset.dart';
+import 'package:finance/screen/reset.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -1,5 +1,5 @@
-import 'package:finance/income.dart';
-import 'package:finance/outcome.dart';
+import 'package:finance/tabbarPage/income.dart';
+import 'package:finance/tabbarPage/outcome.dart';
 import 'package:flutter/material.dart';
 
 class TabBarPage extends StatefulWidget {
