@@ -38,18 +38,19 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
           child: Stack(
             children: <Widget>[
-              Container(
-                height: 400,
-                width: 500,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 30,
-                  vertical: 25,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                  shape: BoxShape.rectangle
-                ),
+              // Container(
+              //   height: 400,
+              //   width: 500,
+              //   padding: EdgeInsets.symmetric(
+              //     horizontal: 30,
+              //     vertical: 25,
+              //   ),
+              //   decoration: BoxDecoration(
+              //     color: Colors.black,
+              //     borderRadius: BorderRadius.circular(10),
+              //     shape: BoxShape.rectangle
+              //   ),
+            
               
             // decoration: const BoxDecoration(
             //     image: DecorationImage(
@@ -70,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
             //     ),
             //   ),
             // )
-            child: Column(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
@@ -134,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                         labelStyle: const TextStyle(color: Colors.blue),
                         labelText: "Password",
                         hintText: "Enter your password",
-                        hintStyle: TextStyle(color: Colors.blue),
+                        hintStyle: const TextStyle(color: Colors.blue),
                         prefixIcon: const Icon(
                           Icons.lock_outline,
                           color: Colors.blue,
@@ -181,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 Padding(
@@ -189,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       width: double.infinity,
                       height: 50,
-                      child: RaisedButton(
+                      child: ElevatedButton(
                           onPressed: () async {
                             final prefs = await SharedPreferences.getInstance();
                             final String? username = prefs.getString('UserID');
@@ -265,10 +266,10 @@ class _LoginPageState extends State<LoginPage> {
                     )),
               ],
             ),
+            ]
             ),
-          ]),
+          ),
         ),
-      ),
-    );
+      );
   }
 }

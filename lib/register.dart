@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           value: item,
                                           child: Container(
                                               alignment: Alignment.center,
-                                              constraints: BoxConstraints(
+                                              constraints: const BoxConstraints(
                                                   minHeight: 48.0),
                                               color: item.color,
                                               child: Text(
@@ -157,7 +157,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Padding(
@@ -226,7 +226,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        style: TextStyle(color: Colors.blue),
+                        style: const TextStyle(color: Colors.blue),
                         cursorColor: Colors.blue,
                         controller: passCont,
                         obscuringCharacter: "*",
@@ -244,9 +244,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.blue)),
                             labelText: "Password",
-                            labelStyle: TextStyle(color: Colors.blue),
+                            labelStyle: const TextStyle(color: Colors.blue),
                             hintText: "Enter your password",
-                            hintStyle: TextStyle(color: Colors.blue),
+                            hintStyle: const TextStyle(color: Colors.blue),
                             prefixIcon: const Icon(
                               Icons.lock_outline,
                               color: Colors.blue,

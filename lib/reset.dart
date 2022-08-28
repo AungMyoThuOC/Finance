@@ -17,7 +17,7 @@ class _ResetScreenState extends State<ResetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reset Password'),
+        title: const Text('Reset Password'),
       ),
       body: Column(
         children: [
@@ -25,7 +25,7 @@ class _ResetScreenState extends State<ResetScreen> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(hintText: 'Email'),
+              decoration: const InputDecoration(hintText: 'Email'),
               onChanged: (value) {
                 setState(() {
                   email = value;
@@ -37,7 +37,7 @@ class _ResetScreenState extends State<ResetScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               RaisedButton(
-                child: Text("Send Request"),
+                child: const Text("Send Request"),
                 onPressed: () {
                   auth.sendPasswordResetEmail(email: email);
                   Navigator.of(context).pop();

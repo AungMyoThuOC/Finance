@@ -39,6 +39,8 @@ dependencies:
   firebase_auth: ^3.6.4
   form_field_validator: ^1.1.0
   flutter_login: ^4.0.0
+  cloud_firestore: ^3.4.6
+  # cool_dropdown: ^1.4.2
   # dropdown_button2: ^1.7.1
 
 dev_dependencies:

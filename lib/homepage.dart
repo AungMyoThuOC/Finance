@@ -10,6 +10,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: gitBody(),
+      bottomNavigationBar: getFotter(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/tabbar');
+        },
+        child: const Icon(
+          Icons.add,
+          size: 25,
+        ),
+      ),
+    );
   }
+
+  gitBody() {}
+  getFotter() {}
 }
