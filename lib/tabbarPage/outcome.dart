@@ -30,6 +30,9 @@ class _OutcomePageState extends State<OutcomePage> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const SizedBox(
+                      height: 60
+                    ),
                 // Padding(
                 //   padding: EdgeInsets.all(8.0),
                 //   child: Column(
@@ -150,13 +153,16 @@ class _OutcomePageState extends State<OutcomePage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        final income = categoryCont.text;
+                  child: Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          // final income = categoryCont.text;
 
-                        createIncome(income: income);
-                      },
-                      child: const Text("Add Outcome")),
+                          // createIncome(income: income);
+                        },
+                        child: const Text("Add Outcome")),
+                  ),
                 )
               ])),
         ),
@@ -164,21 +170,21 @@ class _OutcomePageState extends State<OutcomePage> {
     );
   }
 
-  Future createIncome({required String income}) async {
-    // Reference to document
-    final docIncome =
-        FirebaseFirestore.instance.collection('users').doc('my-id');
+  // Future createIncome({required String income}) async {
+  //   // Reference to document
+  //   final docIncome =
+  //       FirebaseFirestore.instance.collection('users').doc('my-id');
 
-    final user = User(
-      id: docIncome.id,
-      income: income,
-      data: DateTime,
-    );
-    final json = user.toJson();
+  //   final user = User(
+  //     id: docIncome.id,
+  //     income: income,
+  //     data: DateTime,
+  //   );
+  //   final json = user.toJson();
 
-    // Create document and write data to Firebase
-    await docIncome.set(json);
-  }
+  //   // Create document and write data to Firebase
+  //   await docIncome.set(json);
+  // }
 
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
         value: item,
@@ -192,20 +198,20 @@ class _OutcomePageState extends State<OutcomePage> {
       );
 }
 
-class User {
-  late String id;
-  String income;
-  late final date;
+// class User {
+//   late String id;
+//   String income;
+//   late final date;
 
-  User({
-    this.id = '',
-    required this.income,
-    required data,
-  });
+//   User({
+//     this.id = '',
+//     required this.income,
+//     required data,
+//   });
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'income': income,
-        'date': date,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         'id': id,
+//         'income': income,
+//         'date': date,
+//       };
+// }

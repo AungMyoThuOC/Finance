@@ -8,6 +8,7 @@ import 'homepage.dart';
 import 'screen/login.dart';
 import 'tabbarPage/income.dart';
 import 'tabbarPage/outcome.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 // import 'verify.dart';
 
 void main() async {
@@ -30,17 +31,18 @@ class MyApp extends StatelessWidget {
         '/': (context) => const GetStartPage(),
         '/register': (context) => const RegisterPage(),
         // '/verify': (context) => const VerifyScreen(),
-        '/login' : (context) => const LoginPage(),
-        '/home' : (context) => const HomePage(),
-        '/tabbar' :(context) => const TabBarPage(),
-        '/income' : (context) => const IncomePage(),
-        '/outcome' : (context) =>  const OutcomePage(),
+        '/login': (context) => const LoginPage(),
+        '/home': (context) => const HomePage(),
+        '/tabbar': (context) => const TabBarPage(),
+        '/income': (context) => const IncomePage(),
+        '/outcome': (context) => const OutcomePage(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Finance',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      builder: EasyLoading.init(),
     );
   }
 }
