@@ -111,6 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         style: const TextStyle(color: Colors.blue),
                         cursorColor: Colors.blue,
                         controller: userCont,
@@ -144,6 +145,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         keyboardType: TextInputType.emailAddress,
                         style: const TextStyle(color: Colors.blue),
                         cursorColor: Colors.blue,
@@ -170,6 +172,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               Icons.email,
                               color: Colors.blue,
                             )),
+                        
                       ),
                     ),
                     const SizedBox(
@@ -178,6 +181,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         style: const TextStyle(color: Colors.blue),
                         cursorColor: Colors.blue,
                         controller: passCont,

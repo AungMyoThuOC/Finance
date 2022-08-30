@@ -11,6 +11,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar:
+          AppBar(backgroundColor: Colors.transparent, elevation: 0.0, actions: [
+        IconButton(
+          onPressed: () {},
+          // splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          splashRadius: 5,
+          icon: Icon(
+            Icons.settings,
+            size: 30,
+            color: Colors.black,
+          ),
+        ),
+      ]),
       body: gitBody(),
       bottomNavigationBar: getFotter(),
       floatingActionButton: FloatingActionButton(

@@ -1,8 +1,10 @@
 import 'package:finance/screen/reset.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+// import 'package:form_field_validator/form_field_validator.dart';
 // import 'forgotpass.dart';
 // import 'package:dropdown_button2/dropdown_button2.dart';
 
@@ -36,28 +38,27 @@ class _LoginPageState extends State<LoginPage> {
       body: Form(
         key: _fromKey,
         child: Center(
-          child: Stack(
-            children: <Widget>[
+          child: Stack(children: <Widget>[
             Container(
               width: double.infinity,
               height: double.infinity,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.white, Colors.white10]),
+                gradient:
+                    LinearGradient(colors: [Colors.white, Colors.white10]),
               ),
               child: Container(
                 width: 350,
                 height: 350,
                 decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3),
-                    )
-                  ],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3),
+                      )
+                    ],
                     borderRadius: BorderRadius.circular(30)
                         .copyWith(topRight: Radius.circular(0)),
                     gradient:
@@ -75,18 +76,18 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           keyboardType: TextInputType.emailAddress,
-                          style: const TextStyle(color: Colors.blue, fontSize: 15),
+                          style:
+                              const TextStyle(color: Colors.blue, fontSize: 15),
                           cursorColor: Colors.blue,
                           controller: emailController,
-                          validator: (user) {
-                            if (user == null || user.isEmpty) {
+                          validator: (email) {
+                            if (email == null || email.isEmpty) {
                               return "Email can't be blank";
-                            }
-                            // else if (user.length < 6) {
-                            //   return "email  should be more than 6 word";
-                            // }
-                            else {
+                            } else if (email== Characters) {
+                              return "Please enater your valid";
+                            } else {
                               return null;
                             }
                           },
@@ -99,9 +100,8 @@ class _LoginPageState extends State<LoginPage> {
                               // labelText: "Email",
                               hintText: "Enter your Email",
                               hintStyle: TextStyle(color: Colors.blue),
-                              prefixIconConstraints: BoxConstraints(
-                                maxHeight: 10, minWidth: 20
-                              ),
+                              prefixIconConstraints:
+                                  BoxConstraints(maxHeight: 10, minWidth: 20),
                               prefixIcon: Padding(
                                 padding: EdgeInsets.only(right: 10),
                                 child: Icon(
@@ -118,6 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           style: const TextStyle(color: Colors.blue),
                           cursorColor: Colors.blue,
                           controller: passwordController,
@@ -133,9 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                             }
                           },
                           decoration: InputDecoration(
-                            prefixIconConstraints: BoxConstraints(
-                                maxHeight: 10, minWidth: 30
-                            ),
+                              prefixIconConstraints:
+                                  BoxConstraints(maxHeight: 10, minWidth: 30),
                               // focusedBorder: const OutlineInputBorder(
                               //     borderSide: BorderSide(color: Colors.blue)),
                               // labelStyle: const TextStyle(color: Colors.blue),
