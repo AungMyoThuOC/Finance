@@ -79,18 +79,33 @@ class _RegisterPageState extends State<RegisterPage> {
             height: double.infinity,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.red.shade700, Colors.red.shade200])),
+                gradient:
+                    LinearGradient(colors: [Colors.white, Colors.white10])),
             child: Container(
-              width: 420,
-              height: 420,
+              width: 450,
+              height: 450,
               decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3),
+                  )
+                ],
                 borderRadius: BorderRadius.circular(30)
                     .copyWith(topRight: Radius.circular(0)),
-                gradient: LinearGradient(colors: [Colors.red, Colors.white]),
+                gradient:
+                    LinearGradient(colors: [Colors.white, Colors.white12]),
               ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Container(
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30)
+                      .copyWith(topRight: Radius.circular(0)),
+                  gradient:
+                      LinearGradient(colors: [Colors.white, Colors.white12]),
+                ),
                 child: Column(
                   children: [
                     Padding(
@@ -109,12 +124,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           }
                         },
                         decoration: const InputDecoration(
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue)),
-                            labelText: "Username",
+                            // focusedBorder: OutlineInputBorder(
+                            //     borderSide: BorderSide(color: Colors.blue)),
+                            // labelText: "Username",
                             labelStyle: TextStyle(color: Colors.blue),
                             hintText: "Enter your username",
                             hintStyle: TextStyle(color: Colors.blue),
+                            prefixIconConstraints:
+                                BoxConstraints(maxHeight: 10, minWidth: 40),
                             prefixIcon: Icon(
                               Icons.person,
                               color: Colors.blue,
@@ -141,12 +158,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           }
                         },
                         decoration: const InputDecoration(
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue)),
-                            labelText: "Email",
+                            // focusedBorder: OutlineInputBorder(
+                            //     borderSide: BorderSide(color: Colors.blue)),
+                            // labelText: "Email",
                             labelStyle: TextStyle(color: Colors.blue),
                             hintText: "Enter your email",
                             hintStyle: TextStyle(color: Colors.blue),
+                            prefixIconConstraints:
+                                BoxConstraints(maxHeight: 10, minWidth: 40),
                             prefixIcon: Icon(
                               Icons.email,
                               color: Colors.blue,
@@ -174,12 +193,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           }
                         },
                         decoration: InputDecoration(
-                            focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue)),
-                            labelText: "Password",
-                            labelStyle: const TextStyle(color: Colors.blue),
+                            // focusedBorder: const OutlineInputBorder(
+                            //     borderSide: BorderSide(color: Colors.blue)),
+                            // labelText: "Password",
+                            // labelStyle: const TextStyle(color: Colors.blue),
                             hintText: "Enter your password",
                             hintStyle: const TextStyle(color: Colors.blue),
+                            prefixIconConstraints:
+                                BoxConstraints(maxHeight: 10, minWidth: 40),
                             prefixIcon: const Icon(
                               Icons.lock_outline,
                               color: Colors.blue,
@@ -212,10 +233,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () async {
+                            EasyLoading.show(
+                                status: 'loading...',
+                                maskType: EasyLoadingMaskType.black);
                             setState(() {
-                              EasyLoading.show(
-                                  status: 'loading...',
-                                  maskType: EasyLoadingMaskType.black);
                               submit = true;
                               // isLoading = true;
                             });
@@ -238,6 +259,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   // isLoading = false;
                                   Navigator.pushNamed(context, '/login');
                                   userCont.clear();
+                                  emailCont.clear();
                                   passCont.clear();
                                 });
                               } on FirebaseException catch (e) {

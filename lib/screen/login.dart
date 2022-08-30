@@ -44,23 +44,31 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [Colors.red.shade700, Colors.red.shade200]),
+                    colors: [Colors.white, Colors.white10]),
               ),
               child: Container(
                 width: 350,
                 height: 350,
                 decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3),
+                    )
+                  ],
                     borderRadius: BorderRadius.circular(30)
                         .copyWith(topRight: Radius.circular(0)),
                     gradient:
-                        LinearGradient(colors: [Colors.red, Colors.white12])),
+                        LinearGradient(colors: [Colors.white, Colors.white12])),
                 child: Container(
                   margin: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30)
                         .copyWith(topRight: Radius.circular(0)),
                     gradient:
-                        LinearGradient(colors: [Colors.red, Colors.white12]),
+                        LinearGradient(colors: [Colors.white, Colors.white12]),
                   ),
                   child: Column(
                     children: [
@@ -92,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                               hintText: "Enter your Email",
                               hintStyle: TextStyle(color: Colors.blue),
                               prefixIconConstraints: BoxConstraints(
-                                maxHeight: 10
+                                maxHeight: 10, minWidth: 20
                               ),
                               prefixIcon: Padding(
                                 padding: EdgeInsets.only(right: 10),
@@ -125,10 +133,13 @@ class _LoginPageState extends State<LoginPage> {
                             }
                           },
                           decoration: InputDecoration(
-                              focusedBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.blue)),
-                              labelStyle: const TextStyle(color: Colors.blue),
-                              labelText: "Password",
+                            prefixIconConstraints: BoxConstraints(
+                                maxHeight: 10, minWidth: 30
+                            ),
+                              // focusedBorder: const OutlineInputBorder(
+                              //     borderSide: BorderSide(color: Colors.blue)),
+                              // labelStyle: const TextStyle(color: Colors.blue),
+                              // labelText: "Password",
                               hintText: "Enter your password",
                               hintStyle: const TextStyle(color: Colors.blue),
                               prefixIcon: const Icon(
