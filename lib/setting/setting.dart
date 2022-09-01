@@ -11,13 +11,16 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        
+      ),
       body: Container(
         child: Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Setting",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -29,7 +32,7 @@ class _SettingPageState extends State<SettingPage> {
               ),
               TextButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     "Colors",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -43,7 +46,7 @@ class _SettingPageState extends State<SettingPage> {
                   onPressed: () {
                     Navigator.pushNamed(context, '/language');
                   },
-                  child: Text(
+                  child: const Text(
                     "Language",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -54,8 +57,10 @@ class _SettingPageState extends State<SettingPage> {
                 height: 30,
               ),
               TextButton(
-                  onPressed: () {},
-                  child: Text(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/security');
+                  },
+                  child: const Text(
                     "Security",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -68,7 +73,7 @@ class _SettingPageState extends State<SettingPage> {
               ),
               TextButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     "Reset App",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,

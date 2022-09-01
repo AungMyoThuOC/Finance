@@ -9,6 +9,7 @@ import 'firebase_options.dart';
 import 'screen/get_start.dart';
 import 'homepage.dart';
 import 'screen/login.dart';
+import 'setting/security.dart';
 import 'tabbarPage/income.dart';
 import 'tabbarPage/outcome.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         '/outcome': (context) => const OutcomePage(),
         '/setting': (context) => const SettingPage(),
         '/language': (context) => const LanguagePage(),
+        '/security': (context) => const SecurityPage(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Finance',
