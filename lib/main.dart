@@ -1,4 +1,7 @@
+// import 'package:finance/router/custom_router.dart';
 import 'package:finance/screen/register.dart';
+import 'package:finance/setting/language.dart';
+import 'package:finance/setting/setting.dart';
 import 'package:finance/tabbarPage/tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,6 +12,7 @@ import 'screen/login.dart';
 import 'tabbarPage/income.dart';
 import 'tabbarPage/outcome.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // import 'verify.dart';
 
 void main() async {
@@ -26,6 +30,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // localizationsDelegates: AppLocalizations.localizationsDelegates,
+      // supportedLocales: AppLocalizations.supportedLocales,
+      // onGenerateInitialRoutes: CustomRouter.generatedRoute,
       initialRoute: '/',
       routes: {
         '/': (context) => const GetStartPage(),
@@ -36,6 +43,8 @@ class MyApp extends StatelessWidget {
         '/tabbar': (context) => const TabBarPage(),
         '/income': (context) => const IncomePage(),
         '/outcome': (context) => const OutcomePage(),
+        '/setting': (context) => const SettingPage(),
+        '/language': (context) => const LanguagePage(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Finance',

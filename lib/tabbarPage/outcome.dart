@@ -30,9 +30,7 @@ class _OutcomePageState extends State<OutcomePage> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 60
-                    ),
+                const SizedBox(height: 60),
                 // Padding(
                 //   padding: EdgeInsets.all(8.0),
                 //   child: Column(
@@ -61,7 +59,7 @@ class _OutcomePageState extends State<OutcomePage> {
                 //     ],
                 //   ),
                 // ),
-                
+
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
@@ -186,16 +184,16 @@ class _OutcomePageState extends State<OutcomePage> {
   //   await docIncome.set(json);
   // }
 
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-        value: item,
-        child: Text(
-          item,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
-      );
+  // DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+  //       value: item,
+  //       child: Text(
+  //         item,
+  //         style: const TextStyle(
+  //           fontWeight: FontWeight.bold,
+  //           fontSize: 20,
+  //         ),
+  //       ),
+  //     );
 }
 
 // class User {

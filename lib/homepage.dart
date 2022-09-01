@@ -14,7 +14,9 @@ class _HomePageState extends State<HomePage> {
       appBar:
           AppBar(backgroundColor: Colors.transparent, elevation: 0.0, actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/setting');
+          },
           // splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           splashRadius: 5,
