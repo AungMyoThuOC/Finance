@@ -203,7 +203,7 @@ class _SecurityPageState extends State<SecurityPage> {
 
                                 // ignore: use_build_context_synchronously
                                 Navigator.pushReplacementNamed(
-                                    context, '/home');
+                                    context, '/setting');
                               }
                             } on FirebaseException catch (e) {
                               if (e.code == "password don't match") {
