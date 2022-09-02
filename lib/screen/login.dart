@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
 
   // bool isLoading = false;
 
-  final _fromKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
-        key: _fromKey,
+        key: _formKey,
         child: Center(
           child: Stack(children: <Widget>[
             Container(
@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                             if (email == null || email.isEmpty) {
                               return "Email can't be blank";
                             } else if (email== Characters) {
-                              return "Please enater your valid";
+                              return "Please enater your validat email";
                             } else {
                               return null;
                             }
@@ -209,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                                   submit = true;
                                   print('$username');
                                 });
-                                if (_fromKey.currentState!.validate()) {
+                                if (_formKey.currentState!.validate()) {
                                   // setState(() {
                                   //   isLoading = true;
                                   // });
