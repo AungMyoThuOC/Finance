@@ -1,5 +1,11 @@
 // import 'package:finance/router/custom_router.dart';
+import 'dart:async';
+// import 'dart:math';
+
 import 'package:finance/screen/register.dart';
+import 'package:finance/servicesCol/service_locator.dart';
+import 'package:finance/servicesCol/storage/storage_service.dart';
+import 'package:finance/setting/colors.dart';
 import 'package:finance/setting/language.dart';
 import 'package:finance/setting/setting.dart';
 import 'package:finance/tabbarPage/tabbar.dart';
@@ -21,11 +27,24 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+   runZonedGuarded<Future<void>>(() async {
+    setUpServiceLocator();
+
+    final StorageService storageService = getIt<StorageService>();
+    await storageService.init();
+
+    runApp(MyApp(
+      storageService: storageService,
+    ));
+  }, (e, _) => throw e);
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final StorageService storageService;
+  const MyApp({
+    Key? key,
+    required this.storageService,
+  }) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -47,6 +66,7 @@ class MyApp extends StatelessWidget {
         '/setting': (context) => const SettingPage(),
         '/language': (context) => const LanguagePage(),
         '/security': (context) => const SecurityPage(),
+        '/color' : (context) => const ColorPage(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Finance',

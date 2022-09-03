@@ -11,9 +11,7 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        
-      ),
+      appBar: AppBar(),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.only(left: 10),
@@ -31,7 +29,9 @@ class _SettingPageState extends State<SettingPage> {
                 height: 30,
               ),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/color');
+                  },
                   child: const Text(
                     "Colors",
                     style: TextStyle(
