@@ -2,6 +2,8 @@
 import 'dart:async';
 // import 'dart:math';
 
+import 'package:finance/presentationColr/providers/theme_provider.dart';
+import 'package:finance/presentationColr/styles/app_themes.dart';
 import 'package:finance/screen/register.dart';
 import 'package:finance/servicesCol/service_locator.dart';
 import 'package:finance/servicesCol/storage/storage_service.dart';
@@ -11,6 +13,7 @@ import 'package:finance/setting/setting.dart';
 import 'package:finance/tabbarPage/tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'screen/get_start.dart';
 import 'homepage.dart';
@@ -27,7 +30,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-   runZonedGuarded<Future<void>>(() async {
+  runZonedGuarded<Future<void>>(() async {
     setUpServiceLocator();
 
     final StorageService storageService = getIt<StorageService>();
@@ -49,31 +52,44 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // localizationsDelegates: AppLocalizations.localizationsDelegates,
-      // supportedLocales: AppLocalizations.supportedLocales,
-      // onGenerateInitialRoutes: CustomRouter.generatedRoute,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const GetStartPage(),
-        '/register': (context) => const RegisterPage(),
-        // '/verify': (context) => const VerifyScreen(),
-        '/login': (context) => const LoginPage(),
-        '/home': (context) => const HomePage(),
-        '/tabbar': (context) => const TabBarPage(),
-        '/income': (context) => const IncomePage(),
-        '/outcome': (context) => const OutcomePage(),
-        '/setting': (context) => const SettingPage(),
-        '/language': (context) => const LanguagePage(),
-        '/security': (context) => const SecurityPage(),
-        '/color' : (context) => const ColorPage(),
-      },
-      debugShowCheckedModeBanner: false,
-      title: 'Finance',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      builder: EasyLoading.init(),
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => ThemeProvider(storageService),
+          )
+        ],
+        child: Consumer<ThemeProvider>(
+          builder: (c, themeProvider, home) => MaterialApp(
+            // localizationsDelegates: AppLocalizations.localizationsDelegates,
+            // supportedLocales: AppLocalizations.supportedLocales,
+            // onGenerateInitialRoutes: CustomRouter.generatedRoute,
+            initialRoute: '/',
+            routes: {
+              '/': (context) => const GetStartPage(),
+              '/register': (context) => const RegisterPage(),
+              // '/verify': (context) => const VerifyScreen(),
+              '/login': (context) => const LoginPage(),
+              '/home': (context) => const HomePage(),
+              '/tabbar': (context) => const TabBarPage(),
+              '/income': (context) => const IncomePage(),
+              '/outcome': (context) => const OutcomePage(),
+              '/setting': (context) => const SettingPage(),
+              '/language': (context) => const LanguagePage(),
+              '/security': (context) => const SecurityPage(),
+              '/color': (context) => const ColorPage(),
+            },
+            debugShowCheckedModeBanner: false,
+            title: 'Finance',
+           theme: AppThemes.main(
+            primaryColor: themeProvider.selectedPrimaryColor
+           ),
+           darkTheme: AppThemes.main(
+            isDark: true,
+            primaryColor: themeProvider.selectedPrimaryColor
+           ),
+           themeMode: themeProvider.selectedThemeMode,
+            builder: EasyLoading.init(),
+          ),
+        ));
   }
 }
