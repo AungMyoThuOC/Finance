@@ -16,11 +16,12 @@ class ColorPage extends StatelessWidget {
       ),
       body: PageWrapper(
         body: Column(
+          // ignore: prefer_const_literals_to_create_immutables
           children: [
-            SizedBox(
-              height: 30,
-            ),
-            ThemeSwitcher(),
+            // SizedBox(
+            //   height: 30,
+            // ),
+            // ThemeSwitcher(),
             SizedBox(
               height: 20,
             ),

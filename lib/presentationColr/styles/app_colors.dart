@@ -5,6 +5,7 @@ class AppColors {
   static const Color primaryOption2 = Color(0xffd23156);
   static const Color primaryOption3 = Color(0xff13d0c1);
   static const Color primaryOption4 = Color(0xffe5672f);
+  static const Color primaryOption5 = Color(0xff000000);
 
   static const Color white = Color(0xffffffff);
   static const Color white50 = Color(0x88ffffff);
@@ -21,6 +22,7 @@ class AppColors {
     primaryOption2,
     primaryOption3,
     primaryOption4,
+    primaryOption5
   ];
 
   static Color getShade(Color color, {bool darker = false, double value = .1}) {

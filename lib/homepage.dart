@@ -27,20 +27,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ]),
-      body: gitBody(),
-      bottomNavigationBar: getFotter(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/tabbar');
-        },
-        child: const Icon(
-          Icons.add,
-          size: 25,
-        ),
-      ),
     );
   }
-
-  gitBody() {}
-  getFotter() {}
 }
