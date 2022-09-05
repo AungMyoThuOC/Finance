@@ -30,7 +30,7 @@ class SwitcherContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            title,
+            "Fav Color",
             style: Theme.of(context).textTheme.headline6,
           ),
           const SizedBox(

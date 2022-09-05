@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
           icon: Icon(
             Icons.settings,
             size: 30,
-            color: Colors.black,
+             color: Colors.black,
           ),
         ),
       ]),

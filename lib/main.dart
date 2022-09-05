@@ -1,7 +1,6 @@
 // import 'package:finance/router/custom_router.dart';
 import 'dart:async';
 // import 'dart:math';
-
 import 'package:finance/presentationColr/providers/theme_provider.dart';
 import 'package:finance/presentationColr/styles/app_themes.dart';
 import 'package:finance/screen/register.dart';
@@ -10,7 +9,6 @@ import 'package:finance/servicesCol/storage/storage_service.dart';
 import 'package:finance/setting/colors.dart';
 import 'package:finance/setting/language.dart';
 import 'package:finance/setting/setting.dart';
-import 'package:finance/tabbarPage/tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +17,6 @@ import 'screen/get_start.dart';
 import 'homepage.dart';
 import 'screen/login.dart';
 import 'setting/security.dart';
-import 'tabbarPage/income.dart';
-import 'tabbarPage/outcome.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // import 'verify.dart';
@@ -67,12 +63,8 @@ class MyApp extends StatelessWidget {
             routes: {
               '/': (context) => const GetStartPage(),
               '/register': (context) => const RegisterPage(),
-              // '/verify': (context) => const VerifyScreen(),
               '/login': (context) => const LoginPage(),
               '/home': (context) => const HomePage(),
-              // '/tabbar': (context) => const TabBarPage(),
-              // '/income': (context) => const IncomePage(),
-              // '/outcome': (context) => const OutcomePage(),
               '/setting': (context) => const SettingPage(),
               '/language': (context) => const LanguagePage(),
               '/security': (context) => const SecurityPage(),
