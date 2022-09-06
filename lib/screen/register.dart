@@ -1,9 +1,11 @@
 // import 'dart:ffi';
 
+import 'package:blurry_modal_progress_hud/blurry_modal_progress_hud.dart';
 import 'package:finance/screen/login.dart';
 import 'package:finance/screen/verify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -41,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool check = false;
 
-  // bool isLoading = false;
+  bool isLoading = false;
 
   final _fromKey = GlobalKey<FormState>();
 
@@ -60,304 +62,304 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Color.fromARGB(255, 0, 0, 0),
-      //   elevation: 0.0,
-      //   actions: [
-      //     IconButton(
-      //       onPressed: () {},
-      //       icon: const Icon(
-      //         Icons.live_help,
-      //       ),
-      //     )
-      //   ],
-      // ),
-      body: Form(
-        key: _fromKey,
-        child: Center(
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                gradient:
-                    LinearGradient(colors: [Colors.white, Colors.white10])),
+    return BlurryModalProgressHUD(
+      inAsyncCall: isLoading,
+      blurEffectIntensity: 4,
+      progressIndicator: SpinKitFadingCircle(
+        color: Colors.blue,
+        size: 90.0,
+      ),
+      dismissible: false,
+      opacity: 0.4,
+      color: Colors.black,
+      child: Scaffold(
+        body: Form(
+          key: _fromKey,
+          child: Center(
             child: Container(
-              width: 450,
-              height: 450,
+              width: double.infinity,
+              height: double.infinity,
+              alignment: Alignment.center,
               decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3),
-                  )
-                ],
-                borderRadius: BorderRadius.circular(30)
-                    .copyWith(topRight: Radius.circular(0)),
-                gradient:
-                    LinearGradient(colors: [Colors.white, Colors.white12]),
-              ),
+                  gradient:
+                      LinearGradient(colors: [Colors.white, Colors.white10])),
               child: Container(
-                margin: EdgeInsets.all(20),
+                width: 450,
+                height: 450,
                 decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3),
+                    )
+                  ],
                   borderRadius: BorderRadius.circular(30)
                       .copyWith(topRight: Radius.circular(0)),
                   gradient:
                       LinearGradient(colors: [Colors.white, Colors.white12]),
                 ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        style: const TextStyle(color: Colors.blue),
-                        cursorColor: Colors.blue,
-                        controller: userCont,
-                        validator: (user) {
-                          if (user == null || user.isEmpty) {
-                            return "Username can't be blank";
-                          } else if (user.length < 6) {
-                            return "Username should be more than 6 word";
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: const InputDecoration(
-                            // focusedBorder: OutlineInputBorder(
-                            //     borderSide: BorderSide(color: Colors.blue)),
-                            // labelText: "Username",
-                            labelStyle: TextStyle(color: Colors.blue),
-                            hintText: "Enter your username",
-                            hintStyle: TextStyle(color: Colors.blue),
-                            prefixIconConstraints:
-                                BoxConstraints(maxHeight: 10, minWidth: 40),
-                            prefixIcon: Icon(
-                              Icons.person,
-                              color: Colors.blue,
-                            )),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        keyboardType: TextInputType.emailAddress,
-                        style: const TextStyle(color: Colors.blue),
-                        cursorColor: Colors.blue,
-                        controller: emailCont,
-                        validator: (email) {
-                          if (email == null || email.isEmpty) {
-                            return "Email can't be blank";
-                          } else if (email.length < 6) {
-                            return "Username should be more than 6 word";
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: const InputDecoration(
-                            // focusedBorder: OutlineInputBorder(
-                            //     borderSide: BorderSide(color: Colors.blue)),
-                            // labelText: "Email",
-                            labelStyle: TextStyle(color: Colors.blue),
-                            hintText: "Enter your email",
-                            hintStyle: TextStyle(color: Colors.blue),
-                            prefixIconConstraints:
-                                BoxConstraints(maxHeight: 10, minWidth: 40),
-                            prefixIcon: Icon(
-                              Icons.email,
-                              color: Colors.blue,
-                            )),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        style: const TextStyle(color: Colors.blue),
-                        cursorColor: Colors.blue,
-                        controller: passCont,
-                        obscuringCharacter: "*",
-                        obscureText: showpass,
-                        validator: (password) {
-                          if (password == null || password.isEmpty) {
-                            return "Password can't be blank";
-                          } else if (password.length < 6) {
-                            return "Password should be 6 word";
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: InputDecoration(
-                            // focusedBorder: const OutlineInputBorder(
-                            //     borderSide: BorderSide(color: Colors.blue)),
-                            // labelText: "Password",
-                            // labelStyle: const TextStyle(color: Colors.blue),
-                            hintText: "Enter your password",
-                            hintStyle: const TextStyle(color: Colors.blue),
-                            prefixIconConstraints:
-                                BoxConstraints(maxHeight: 10, minWidth: 40),
-                            prefixIcon: const Icon(
-                              Icons.lock_outline,
-                              color: Colors.blue,
-                            ),
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    showpass = !showpass;
-                                  });
-                                },
-                                splashRadius: 5,
-                                icon: showpass
-                                    ? const Icon(
-                                        Icons.visibility_off,
-                                        color: Colors.blue,
-                                      )
-                                    : const Icon(
-                                        Icons.visibility,
-                                        color: Colors.blue,
-                                      ))),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            EasyLoading.show(
-                                status: 'loading...',
-                                maskType: EasyLoadingMaskType.black);
-                            setState(() {
-                              submit = true;
-                              // isLoading = true;
-                            });
-                            // await Future.delayed(const Duration(seconds: 3));
-                            if (_fromKey.currentState!.validate()) {
-                              try {
-                                final auth = FirebaseAuth.instance;
-
-                                final newUser = await auth
-                                    .createUserWithEmailAndPassword(
-                                        email: emailCont.text,
-                                        password: passCont.text)
-                                    .then((_) {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) => VerifyScreen()));
-                                });
-                                setState(() {
-                                  // isLoading = false;
-                                  // Navigator.pushNamed(context, '/login');
-                                  userCont.clear();
-                                  emailCont.clear();
-                                  passCont.clear();
-                                });
-
-                                SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-
-                                prefs.setString('UserID', newUser.user!.uid);
-                              } on FirebaseException catch (e) {
-                                if (e.code == 'user-not-found') {
-                                  errorMessage =
-                                      'No user found with this E-mail';
-                                } else if (e.code == 'wrong-password') {
-                                  errorMessage = ' Wrong password !';
-                                } else {
-                                  errorMessage = e.code;
-                                }
-                                // setState(() {
-                                //   isLoading = false;
-                                // });
-                                // ignore: use_build_context_synchronously
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(errorMessage),
-                                        backgroundColor: Colors.red,
-                                        duration: const Duration(seconds: 2)));
-                              } catch (e) {
-                                print(e);
-                                // setState(() {
-                                //   isLoading = false;
-                                // });
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(e.toString()),
-                                        backgroundColor: Colors.red,
-                                        duration: const Duration(seconds: 2)));
-                              }
+                child: Container(
+                  margin: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30)
+                        .copyWith(topRight: Radius.circular(0)),
+                    gradient:
+                        LinearGradient(colors: [Colors.white, Colors.white12]),
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          style: const TextStyle(color: Colors.blue),
+                          cursorColor: Colors.blue,
+                          controller: userCont,
+                          validator: (user) {
+                            if (user == null || user.isEmpty) {
+                              return "Username can't be blank";
+                            } else if (user.length < 6) {
+                              return "Username should be more than 6 word";
+                            } else {
+                              return null;
                             }
-
-                            // if (_fromKey.currentState!.validate()) {
-                            //   SharedPreferences prefs =
-                            //       await SharedPreferences.getInstance();
-                            //   prefs.setString('userValue', userCont.text);
-                            //   prefs.setString('passValue', passCont.text);
-                            //   setState(() {
-                            //     Navigator.pushNamed(context, '/login');
-                            //     userCont.clear();
-                            //     passCont.clear();
-                            //   });
-                            EasyLoading.showError('Failed with Error');
-                            EasyLoading.showSuccess("Great Success!");
                           },
-                          // style: ElevatedButton.styleFrom(
-                          //     primary: Color.fromARGB(235, 229, 60, 60)),
-                          child:
-                              // (isLoading)
-                              //     ? const SizedBox(
-                              //         width: 16,
-                              //         height: 16,
-                              //         child: CircularProgressIndicator(
-                              //           color: Colors.white,
-                              //           strokeWidth: 1.5,
-                              //         ),
-                              //       )
-                              //     :
-                              const Text(
-                            "Register",
-                            style: TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
+                              // focusedBorder: OutlineInputBorder(
+                              //     borderSide: BorderSide(color: Colors.blue)),
+                              // labelText: "Username",
+                              labelStyle: TextStyle(color: Colors.blue),
+                              hintText: "Enter your username",
+                              hintStyle: TextStyle(color: Colors.blue),
+                              prefixIconConstraints:
+                                  BoxConstraints(maxHeight: 10, minWidth: 40),
+                              prefixIcon: Icon(
+                                Icons.person,
+                                color: Colors.blue,
+                              )),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          keyboardType: TextInputType.emailAddress,
+                          style: const TextStyle(color: Colors.blue),
+                          cursorColor: Colors.blue,
+                          controller: emailCont,
+                          validator: (email) {
+                            if (email == null || email.isEmpty) {
+                              return "Email can't be blank";
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration: const InputDecoration(
+                              // focusedBorder: OutlineInputBorder(
+                              //     borderSide: BorderSide(color: Colors.blue)),
+                              // labelText: "Email",
+                              labelStyle: TextStyle(color: Colors.blue),
+                              hintText: "Enter your email",
+                              hintStyle: TextStyle(color: Colors.blue),
+                              prefixIconConstraints:
+                                  BoxConstraints(maxHeight: 10, minWidth: 40),
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: Colors.blue,
+                              )),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          style: const TextStyle(color: Colors.blue),
+                          cursorColor: Colors.blue,
+                          controller: passCont,
+                          obscuringCharacter: "*",
+                          obscureText: showpass,
+                          validator: (password) {
+                            if (password == null || password.isEmpty) {
+                              return "Password can't be blank";
+                            } else if (password.length < 6) {
+                              return "Password should be 6 word";
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                              // focusedBorder: const OutlineInputBorder(
+                              //     borderSide: BorderSide(color: Colors.blue)),
+                              // labelText: "Password",
+                              // labelStyle: const TextStyle(color: Colors.blue),
+                              hintText: "Enter your password",
+                              hintStyle: const TextStyle(color: Colors.blue),
+                              prefixIconConstraints:
+                                  BoxConstraints(maxHeight: 10, minWidth: 40),
+                              prefixIcon: const Icon(
+                                Icons.lock_outline,
+                                color: Colors.blue,
+                              ),
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      showpass = !showpass;
+                                    });
+                                  },
+                                  splashRadius: 5,
+                                  icon: showpass
+                                      ? const Icon(
+                                          Icons.visibility_off,
+                                          color: Colors.blue,
+                                        )
+                                      : const Icon(
+                                          Icons.visibility,
+                                          color: Colors.blue,
+                                        ))),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              await Future.delayed(Duration(seconds: 5), () {
+                                setState(() {
+                                  isLoading = !isLoading;
+                                });
+                              });
+                              // EasyLoading.show(
+                              //     status: 'loading...',
+                              //     maskType: EasyLoadingMaskType.black);
+                              setState(() {
+                                submit = true;
+                                // isLoading = true;
+                              });
+                              // await Future.delayed(const Duration(seconds: 3));
+                              if (_fromKey.currentState!.validate()) {
+                                try {
+                                  final auth = FirebaseAuth.instance;
+
+                                  final newUser = await auth
+                                      .createUserWithEmailAndPassword(
+                                          email: emailCont.text,
+                                          password: passCont.text)
+                                      .then((_) {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                VerifyScreen()));
+                                  });
+                                  final currentuser =
+                                      FirebaseAuth.instance.currentUser;
+                                  currentuser!.sendEmailVerification();
+                                  setState(() {
+                                    // isLoading = false;
+                                    // Navigator.pushNamed(context, '/login');
+                                    userCont.clear();
+                                    emailCont.clear();
+                                    passCont.clear();
+                                  });
+
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+
+                                  prefs.setString('UserID', newUser.user!.uid);
+                                } on FirebaseException catch (e) {
+                                  if (e.code == 'user-not-found') {
+                                    errorMessage =
+                                        'No user found with this E-mail';
+                                  } else if (e.code == 'wrong-password') {
+                                    errorMessage = ' Wrong password !';
+                                  } else {
+                                    errorMessage = e.code;
+                                  }
+                                  // setState(() {
+                                  //   isLoading = false;
+                                  // });
+                                  // ignore: use_build_context_synchronously
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(errorMessage),
+                                          backgroundColor: Colors.red,
+                                          duration:
+                                              const Duration(seconds: 2)));
+                                } catch (e) {
+                                  print(e);
+                                  // setState(() {
+                                  //   isLoading = false;
+                                  // });
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(e.toString()),
+                                          backgroundColor: Colors.red,
+                                          duration:
+                                              const Duration(seconds: 2)));
+                                }
+                              }
+
+                              // if (_fromKey.currentState!.validate()) {
+                              //   SharedPreferences prefs =
+                              //       await SharedPreferences.getInstance();
+                              //   prefs.setString('userValue', userCont.text);
+                              //   prefs.setString('passValue', passCont.text);
+                              //   setState(() {
+                              //     Navigator.pushNamed(context, '/login');
+                              //     userCont.clear();
+                              //     passCont.clear();
+                              //   });
+                              // EasyLoading.showError('Failed with Error');
+                              // EasyLoading.showSuccess("Great Success!");
+                            },
+                            // style: ElevatedButton.styleFrom(
+                            //     primary: Color.fromARGB(235, 229, 60, 60)),
+                            child: const Text(
+                              "Register",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Existing user?",
-                          style: TextStyle(color: Colors.blueGrey),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/login');
-                            },
-                            child: const Text(
-                              'login',
-                              style: TextStyle(
-                                color: Colors.blue,
-                              ),
-                            ))
-                      ],
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Existing user?",
+                            style: TextStyle(color: Colors.blueGrey),
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/login');
+                              },
+                              child: const Text(
+                                'login',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                ),
+                              ))
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
