@@ -1,5 +1,7 @@
 // import 'dart:ffi';
 
+import 'package:finance/screen/login.dart';
+import 'package:finance/screen/verify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -172,7 +174,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               Icons.email,
                               color: Colors.blue,
                             )),
-                        
                       ),
                     ),
                     const SizedBox(
@@ -249,23 +250,27 @@ class _RegisterPageState extends State<RegisterPage> {
                               try {
                                 final auth = FirebaseAuth.instance;
 
-                                final newUser =
-                                    await auth.createUserWithEmailAndPassword(
+                                final newUser = await auth
+                                    .createUserWithEmailAndPassword(
                                         email: emailCont.text,
-                                        password: passCont.text);
+                                        password: passCont.text)
+                                    .then((_) {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) => VerifyScreen()));
+                                });
+                                setState(() {
+                                  // isLoading = false;
+                                  // Navigator.pushNamed(context, '/login');
+                                  userCont.clear();
+                                  emailCont.clear();
+                                  passCont.clear();
+                                });
 
                                 SharedPreferences prefs =
                                     await SharedPreferences.getInstance();
 
                                 prefs.setString('UserID', newUser.user!.uid);
-
-                                setState(() {
-                                  // isLoading = false;
-                                  Navigator.pushNamed(context, '/login');
-                                  userCont.clear();
-                                  emailCont.clear();
-                                  passCont.clear();
-                                });
                               } on FirebaseException catch (e) {
                                 if (e.code == 'user-not-found') {
                                   errorMessage =
