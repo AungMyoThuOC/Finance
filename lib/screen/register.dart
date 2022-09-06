@@ -4,7 +4,7 @@ import 'package:blurry_modal_progress_hud/blurry_modal_progress_hud.dart';
 import 'package:finance/screen/login.dart';
 import 'package:finance/screen/verify.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+// import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -53,12 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   var errorMessage = '';
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   currentChoice = items[0];
-  //   super.initState();
-  // }
+  
 
   @override
   Widget build(BuildContext context) {
