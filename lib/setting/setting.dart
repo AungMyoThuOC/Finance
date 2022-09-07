@@ -37,7 +37,8 @@ class _SettingPageState extends State<SettingPage> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.black),
+                        // color: Colors.black
+                      ),
                   )),
               const SizedBox(
                 height: 30,
@@ -51,7 +52,8 @@ class _SettingPageState extends State<SettingPage> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.black),
+                        // color: Colors.black
+                      ),
                   )),
               const SizedBox(
                 height: 30,
@@ -65,7 +67,7 @@ class _SettingPageState extends State<SettingPage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.black,
+                      // color: Colors.black,
                     ),
                   )),
               const SizedBox(
@@ -78,7 +80,7 @@ class _SettingPageState extends State<SettingPage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.black,
+                      // color: Colors.black,
                     ),
                   )),
             ],
