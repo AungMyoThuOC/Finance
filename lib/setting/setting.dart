@@ -11,7 +11,9 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        //  backgroundColor: Theme.of(context).colorScheme.secondary,
+      ),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.only(left: 10),

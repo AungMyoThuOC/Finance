@@ -4,7 +4,18 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class SecurityPage extends StatefulWidget {
-  const SecurityPage({Key? key}) : super(key: key);
+  SecurityPage({Key? key}) : super(key: key);
+
+  void _changePassword(String currentPassword, String newPassword) async {
+    final user = await FirebaseAuth.instance.currentUser;
+    final cred = EmailAuthProvider.credential(
+        email: user!.email!, password: currentPassword);
+    user.reauthenticateWithCredential(cred).then((value) {
+      user.updatePassword(newPassword).then((_) {
+        print(newPassword);
+      }).catchError((error) {});
+    }).catchError((err) {});
+  }
 
   @override
   State<SecurityPage> createState() => _SecurityPageState();

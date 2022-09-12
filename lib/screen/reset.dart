@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class ResetScreen extends StatefulWidget {
   const ResetScreen({Key? key}) : super(key: key);
@@ -10,43 +11,101 @@ class ResetScreen extends StatefulWidget {
 }
 
 class _ResetScreenState extends State<ResetScreen> {
-  late String email;
-  final auth = FirebaseAuth.instance;
+  final formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  // late String email;
+  // final auth = FirebaseAuth.instance;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+
+    super.dispose();
+  }
+
+  Future passwordReset() async {
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: emailController.text.trim());
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text("Password reset link sent! Check your email"),
+            );
+          });
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text(e.message.toString()),
+            );
+          });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: const Text('Reset Password'),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(hintText: 'Email'),
-              onChanged: (value) {
-                setState(() {
-                  email = value;
-                });
-              },
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RaisedButton(
-                child: const Text("Send Request"),
-                onPressed: () {
-                  auth.sendPasswordResetEmail(email: email);
-                  Navigator.of(context).pop();
-                },
-                color: Theme.of(context).accentColor,
+              Text(
+                "Receive and email to\nreset  your password",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  keyboardType: TextInputType.emailAddress,
+                  style: const TextStyle(color: Colors.blue, fontSize: 15),
+                  cursorColor: Colors.blue,
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                      hintText: "Email",
+                      hintStyle: TextStyle(color: Colors.blue),
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.only(right: 10),
+                        child: Icon(
+                          Icons.mail,
+                          color: Colors.blue,
+                          size: 20,
+                        ),
+                      )),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              MaterialButton(
+                onPressed: passwordReset,
+                child: Text(
+                  "Reset Password",
+                ),
+                color: Theme.of(context).colorScheme.secondary,
+                // color: Colors.blue[200],
               )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }

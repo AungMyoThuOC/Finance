@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
               '/home': (context) => const HomePage(),
               '/setting': (context) => const SettingPage(),
               '/language': (context) => const LanguagePage(),
-              '/security': (context) => const SecurityPage(),
+              '/security': (context) => SecurityPage(),
               '/color': (context) => const ColorPage(),
             },
             debugShowCheckedModeBanner: false,
