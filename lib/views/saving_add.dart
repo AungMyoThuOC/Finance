@@ -129,7 +129,6 @@ class _SavingAddState extends State<SavingAdd> {
                       DataRepository().addSaving(Saving(
                         _currentSlider,
                         date: DateTime.now(),
-                        vaccinations: [],
                         target: savingController.text,
                       ));
                     }

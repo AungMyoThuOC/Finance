@@ -7,6 +7,7 @@ class Income {
   int amount;
   DateTime date;
   String category;
+  String? autoID;
 
   Income(this.amount, {required this.date, required this.category});
 
@@ -14,6 +15,8 @@ class Income {
 
   factory Income.fromSnapshot(DocumentSnapshot snapshot) {
     final newIncome = Income.fromJson(snapshot.data() as Map<String, dynamic>);
+    newIncome.autoID = snapshot.reference.id;
+
     return newIncome;
   }
 

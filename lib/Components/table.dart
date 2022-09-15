@@ -8,6 +8,7 @@ import 'package:personal_financial/data_repository.dart';
 import 'package:personal_financial/models/income.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:personal_financial/models/remaning_saving.dart';
 import 'package:personal_financial/models/saving.dart';
 
 class TableInOutCome extends StatefulWidget {
@@ -20,6 +21,8 @@ class TableInOutCome extends StatefulWidget {
 class _TableInOutComeState extends State<TableInOutCome> {
   double sum = 0;
   double total = 0;
+  double saving = 0;
+  double tot = 0;
   final DataRepository repository = DataRepository();
 
   void getIncomeSum() {
@@ -40,8 +43,28 @@ class _TableInOutComeState extends State<TableInOutCome> {
     );
   }
 
+  void getRemaining() {
+    FirebaseFirestore.instance
+        .collection('User')
+        .doc('admin@gmail.com')
+        .collection('Saving')
+        .get()
+        .then(
+      (StreamBuilder) {
+        StreamBuilder.docs.forEach((result) {
+          saving = saving + result.data()['amount'];
+        });
+        setState(() {
+          tot = saving;
+          print(tot);
+        });
+      },
+    );
+  }
+
   @override
   void initState() {
+    getRemaining();
     getIncomeSum();
     super.initState();
   }
@@ -51,7 +74,7 @@ class _TableInOutComeState extends State<TableInOutCome> {
     return Column(
       children: [
         Container(
-          height: 200,
+          height: 1,
           child: StreamBuilder<QuerySnapshot>(
               stream: repository.getIncome(),
               builder: (context, snapshot) {
@@ -62,18 +85,7 @@ class _TableInOutComeState extends State<TableInOutCome> {
                 double sum = 0.0;
                 for (int i = 0; i < ds.length; i++)
                   sum += (ds[i]['amount']).toDouble();
-
-                return Row(children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Text(
-                      "Total is : $sum ",
-                    ),
-                  ),
-                  Text(
-                    " ",
-                  ),
-                ]);
+                return Text('');
               }),
         ),
         Table(defaultColumnWidth: const FixedColumnWidth(130.0), children: [
@@ -95,8 +107,8 @@ class _TableInOutComeState extends State<TableInOutCome> {
               ),
             ),
           ]),
-          const TableRow(children: [
-            Padding(
+          TableRow(children: [
+            const Padding(
               padding: EdgeInsets.symmetric(vertical: 15.0),
               child: Text(
                 'Saving',
@@ -106,7 +118,7 @@ class _TableInOutComeState extends State<TableInOutCome> {
             Padding(
               padding: EdgeInsets.symmetric(vertical: 15.0),
               child: Text(
-                '1000',
+                '${tot}',
                 textAlign: TextAlign.end,
               ),
             )

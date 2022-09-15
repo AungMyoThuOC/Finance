@@ -6,6 +6,9 @@ import 'package:personal_financial/data_repository.dart';
 import 'package:personal_financial/models/income.dart';
 import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddIncome extends StatefulWidget {
   AddIncome({Key? key}) : super(key: key);
@@ -20,9 +23,17 @@ class _AddIncomeState extends State<AddIncome> {
   TextEditingController amountController = TextEditingController();
 
   bool choose = true;
+  List<IconData> navBarItem = [
+    Icons.family_restroom,
+    Icons.cast_for_education,
+    Icons.home,
+    Icons.car_crash,
+    Icons.shop,
+    Icons.phone
+  ];
 
   bool newCategory = false;
-
+  List<dynamic> list = [];
   TabController? controller;
 
   @override
@@ -96,48 +107,79 @@ class _AddIncomeState extends State<AddIncome> {
                           Row(
                             children: [
                               Column(
-                                children: const [
-                                  CircleAvatar(
-                                    radius: 25,
-                                    child: Icon(
-                                      Icons.museum,
-                                      size: 35,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    "Museum",
-                                    style: TextStyle(fontSize: 16),
+                                children: [
+                                  Container(
+                                    height: 200,
+                                    width: 200,
                                   )
                                 ],
                               ),
                               const SizedBox(
                                 width: 25,
                               ),
-                              Column(
-                                children: [
-                                  CircleAvatar(
-                                      radius: 25,
-                                      child: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              newCategory = !newCategory;
-                                            });
-                                          },
-                                          icon: const Icon(Icons.add))),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  const Text(
-                                    "Create",
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                ],
-                              ),
                             ],
+                          ),
+                          Container(
+                            height: 200,
+                            child: GridView.count(
+                              mainAxisSpacing: 10.0,
+                              scrollDirection: Axis.horizontal,
+                              crossAxisCount: 2,
+                              children: List.generate(
+                                7,
+                                (index) => Center(
+                                  child: CircleAvatar(
+                                    radius: 25,
+                                    backgroundColor: Colors.blueAccent,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        setState(() {});
+                                      },
+                                      icon: Icon(
+                                        navBarItem[index],
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  //     child: IconButton(
+                                  //   onPressed: () {},
+                                  //   icon: Icon(
+                                  //     navBarItem[index],
+                                  //     color: Colors.white,
+                                  //   ),
+                                  // )),
+                                ),
+                              ),
+                            ),
+                            // Container(
+                            //     height: 50,
+                            //     child: ListView.builder(
+                            //         shrinkWrap: true,
+                            //         scrollDirection: Axis.horizontal,
+                            //         itemCount: navBarItem.length,
+                            //         itemBuilder: (context, index) {
+                            //           return InkWell(
+                            //             onTap: () {
+                            //               print(navBarItem[index]);
+                            //             },
+                            //             child: Container(
+                            //               padding: EdgeInsets.symmetric(
+                            //                   horizontal: 10, vertical: 10),
+                            //               margin:
+                            //                   EdgeInsets.symmetric(horizontal: 5),
+                            //               decoration: BoxDecoration(
+                            //                   color: Colors.blueAccent,
+                            //                   borderRadius:
+                            //                       BorderRadius.circular(15)),
+                            //               child: Center(
+                            //                 child: Icon(
+                            //                   navBarItem[index],
+                            //                   color: Colors.white,
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           );
+                            //         })),
                           )
                         ],
                       ),
